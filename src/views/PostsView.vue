@@ -2,20 +2,28 @@
 import { onMounted, ref } from 'vue';
 import postApi from '../services/apis/postApi';
 import PostCard from '../components/PostCard.vue';
-
+import Pagination from '../components/Pagination.vue';
 
 const posts = ref([]);
-const pagination = ref();
+const paginationDetails = ref();
 
+
+async function changePage(pageUrl) {
+	let response = (await postApi.getPaginated(pageUrl)).data;
+	posts.value = response.data;
+
+	delete response.data;
+	paginationDetails.value = response;
+}
 
 
 onMounted(async () => {
-	let response = (await postApi.getAll()).data;
+	let response = (await postApi.getPaginated()).data;
 
 	posts.value = response.data;
 
 	delete response.data;
-	pagination.value = response;
+	paginationDetails.value = response;
 });
 </script>
 
@@ -31,9 +39,15 @@ onMounted(async () => {
 			<!-- todo: PAGINATION COMPONENT -->
 		</div>
 
-		<div class="flex flex-col space-y-4">
+		<div class="flex flex-col space-y-4 max-w-3xl mx-auto">
 			<post-card v-for="post in posts"
 				:post="post" />
+
+			<div class="flex justify-center">
+				<pagination :pagination="paginationDetails"
+					@changePage="changePage" />
+			</div>
+
 		</div>
 	</section>
 </template>

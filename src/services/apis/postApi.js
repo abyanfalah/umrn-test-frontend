@@ -3,12 +3,11 @@ const url = api.defaults.baseURL + "posts/";
 
 export default {
 	getAll: (count, page) => {
-		return api.get(url, {
-			params: {
-				count: count ?? 5,
-				page: page ?? 1,
-			}
-		});
+		return api.get(url);
+	},
+	getPaginated: (paginatedUrl) => {
+		const paginated = paginatedUrl ?? `${url}?page=1`;
+		return api.get(paginated);
 	},
 	getById: (id) => {
 		return api.get(url + id);

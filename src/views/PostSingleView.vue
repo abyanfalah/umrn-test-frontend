@@ -32,9 +32,9 @@ onBeforeMount(async () => {
 
 <template>
 	<section v-if="post">
-		<div class="flex justify-between items-center">
-			<h1 class="inline-block text-5xl">{{ post.title }}</h1>
 
+		<!-- buttons -->
+		<div class="flex justify-end">
 			<div class="flex items-center space-x-2"
 				v-if="deleteDialog">
 				<p>Delete this post?</p>
@@ -52,9 +52,6 @@ onBeforeMount(async () => {
 					bg-red-500
 					hover:bg-red-400
 					text-white">Yes</button>
-
-
-
 			</div>
 
 			<div v-else
@@ -69,18 +66,32 @@ onBeforeMount(async () => {
 
 				<button-back />
 			</div>
-
 		</div>
 
-		<p>
-			<span class="opacity-50">By: </span>
-			<span>{{ post.author_name }}</span>
-		</p>
+		<!-- contents -->
+		<div class="flex flex-col max-w-3xl mx-auto mt-10">
+			<div>
+				<h1 class="inline-block text-5xl">{{ post.title }}</h1>
 
-		<p>
-			<span class="opacity-50">{{ new Date(post.created_at).toDateString() }}</span>
-		</p>
+				<p>
+					<span class="opacity-50">By: </span>
+					<span>{{ post.author_name }}</span>
+				</p>
 
-		<p class="my-10">{{ post.content }}...</p>
+				<p>
+					<span class="opacity-50">{{ new Date(post.created_at).toDateString() }}</span>
+				</p>
+
+
+			</div>
+
+			<p class="my-10">{{ post.content }}...</p>
+		</div>
+
+
+
+
+
+
 	</section>
 </template>
