@@ -1,6 +1,6 @@
 # frontend
 Frontend dari tes teknikal Umrona.
-Dibangun dengan Vue, Vue-router, axios.
+Dibangun dengan Vue, Vue-router, axios dan TailwindCSS untuk styling.
 
 Aplikasi terdiri dari 4 halaman:
 1. List post
