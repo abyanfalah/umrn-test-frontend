@@ -9,18 +9,35 @@ const route = useRoute();
 const postId = route.params.id;
 
 const post = ref();
+const valid = ref({
+	title: true,
+	author_name: true,
+	content: true,
+});
 
 async function updatePost() {
+	if (!validate()) return;
+
 
 	try {
-		await postApi.update(post.value, post.value.id);
+		const response = await postApi.update(post.value, post.value.id);
+		console.log(response);
 		alert("post updated");
 		router.push('/posts');
 	} catch (e) {
 		console.error(e);
 		alert('update failed');
 	}
+}
 
+function validate() {
+	const p = post.value;
+
+	valid.value.title = p.title !== '';
+	valid.value.author_name = p.author_name !== '';
+	valid.value.content = p.content !== '';
+
+	return p.title && p.author_name && p.content;
 }
 
 onBeforeMount(async () => {
@@ -42,32 +59,44 @@ onBeforeMount(async () => {
 			<!-- title -->
 			<div class="flex justify-between">
 				<label for="title">Title</label>
-				<input v-model="post.title"
-					name="title"
-					type="text"
-					id="title"
-					class=" border border-neutral-400 w-96 rounded px-4 py-2">
+				<div class="flex flex-col">
+					<input v-model="post.title"
+						name="title"
+						type="text"
+						id="title"
+						class=" border border-neutral-400 w-96 rounded px-4 py-2">
+					<p v-show="!valid.title"
+						class="text-red-700">This field is required.</p>
+				</div>
 			</div>
 
 			<!-- author -->
 			<div class="flex justify-between">
 				<label for="author">Author</label>
-				<input v-model="post.author_name"
-					name="author_name"
-					type="text"
-					id="author"
-					class=" border border-neutral-400 w-96 rounded px-4 py-2">
+				<div class="flex flex-col">
+					<input v-model="post.author_name"
+						name="author_name"
+						type="text"
+						id="author"
+						class=" border border-neutral-400 w-96 rounded px-4 py-2">
+					<p v-show="!valid.author_name"
+						class="text-red-700">This field is required.</p>
+				</div>
 			</div>
 
 			<!-- content -->
 			<div class="flex justify-between">
 				<label for="content">Content</label>
-				<textarea v-model="post.content"
-					name="content"
-					id="content"
-					cols="30"
-					rows="10"
-					class=" border border-neutral-400 w-96 rounded px-4 py-2"></textarea>
+				<div class="flex flex-col">
+					<textarea v-model="post.content"
+						name="content"
+						id="content"
+						cols="30"
+						rows="10"
+						class=" border border-neutral-400 w-96 rounded px-4 py-2"></textarea>
+					<p v-show="!valid.content"
+						class="text-red-700">This field is required.</p>
+				</div>
 			</div>
 
 			<div class="text-end">
