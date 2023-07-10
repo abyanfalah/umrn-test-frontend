@@ -1,29 +1,27 @@
 # frontend
+Frontend dari tes teknikal Umrona.
+Dibangun dengan Vue, Vue-router, axios.
 
-This template should help get you started developing with Vue 3 in Vite.
+Aplikasi terdiri dari 4 halaman:
+1. List post
+2. Detail post
+3. Form post baru
+4. Form edit post
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
+## Instalasi
+1. Clone repositori
+2. Jalankan perintah berikut di direktori project:
 ```sh
 npm install
 ```
+3. Setting url API di file `.env`
 
-### Compile and Hot-Reload for Development
-
+### Jalankan aplikasi untuk Development
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
-
+### Kompilasi untuk Production
 ```sh
 npm run build
 ```
