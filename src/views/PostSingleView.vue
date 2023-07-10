@@ -81,11 +81,9 @@ onBeforeMount(async () => {
 				<p>
 					<span class="opacity-50">{{ new Date(post.created_at).toDateString() }}</span>
 				</p>
-
-
 			</div>
 
-			<p class="my-10">{{ post.content }}...</p>
+			<p class="my-10">{{ post.content }}</p>
 		</div>
 
 
